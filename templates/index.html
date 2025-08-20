@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Default Prediction</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Credit Default Risk Predictor</h1>
+        <form action="/predict" method="POST">
+            <label>Credit Limit (LIMIT_BAL)</label>
+            <input type="number" step="any" name="LIMIT_BAL" required value="{{ user_input.get('LIMIT_BAL', '') }}">
+
+            <label>Sex (1 = Male, 2 = Female)</label>
+            <input type="number" name="SEX" min="1" max="2" required value="{{ user_input.get('SEX', '') }}">
+
+            <label>Education (1 = Graduate, 2 = University, 3 = High School, 4 = Others)</label>
+            <input type="number" name="EDUCATION" min="1" max="4" required value="{{ user_input.get('EDUCATION', '') }}">
+
+            <label>Marriage (1 = Married, 2 = Single, 3 = Others)</label>
+            <input type="number" name="MARRIAGE" min="1" max="3" required value="{{ user_input.get('MARRIAGE', '') }}">
+
+            <label>Age</label>
+            <input type="number" name="AGE" required value="{{ user_input.get('AGE', '') }}">
+
+            <label>Total Bill Amount (TOTAL_BILL_AMT)</label>
+            <input type="number" step="any" name="TOTAL_BILL_AMT" required value="{{ user_input.get('TOTAL_BILL_AMT', '') }}">
+
+            <label>Total Pay Amount (TOTAL_PAY_AMT)</label>
+            <input type="number" step="any" name="TOTAL_PAY_AMT" required value="{{ user_input.get('TOTAL_PAY_AMT', '') }}">
+
+            <label>Average Bill Amount (AVG_BILL_AMT)</label>
+            <input type="number" step="any" name="AVG_BILL_AMT" required value="{{ user_input.get('AVG_BILL_AMT', '') }}">
+
+            <label>Average Pay Amount (AVG_PAY_AMT)</label>
+            <input type="number" step="any" name="AVG_PAY_AMT" required value="{{ user_input.get('AVG_PAY_AMT', '') }}">
+
+            <label>Utilization Ratio (UTILIZATION_RATIO)</label>
+            <input type="number" step="any" name="UTILIZATION_RATIO" required value="{{ user_input.get('UTILIZATION_RATIO', '') }}">
+
+            <button type="submit">Predict</button>
+        </form>
+
+        {% if prediction is not none %}
+            <div class="result">
+                <h2>Prediction: {{ 'Will Default' if prediction == 1 else 'No Default' }}</h2>
+                <p>Probability of Default: {{ probability }}</p>
+            </div>
+        {% endif %}
+
+        {% if error %}
+            <div class="error">
+                <p>Error: {{ error }}</p>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
