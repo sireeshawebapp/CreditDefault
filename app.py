@@ -6,7 +6,7 @@ import io
 
 app = Flask(__name__)
 
-# The public URL for your model file in Google Cloud Storage
+# The public URL for your model file
 MODEL_URL = "https://storage.googleapis.com/creditdefaulters/final_credit_default_model_rf.pkl"
 
 # Load the model directly from the URL
@@ -16,7 +16,7 @@ try:
         model = joblib.load(io.BytesIO(model_bytes))
 except Exception as e:
     print(f"Error loading model from URL: {e}")
-    model = None # Set model to None to prevent app from crashing
+    model = None
 
 @app.route("/")
 def index():
@@ -42,7 +42,6 @@ def predict():
             float(user_input["UTILIZATION_RATIO"])
         ]
 
-        # Use the loaded model to make predictions
         prediction = model.predict([features])[0]
         prob = model.predict_proba([features])[0][1]
 
@@ -53,6 +52,3 @@ def predict():
 
     except Exception as e:
         return render_template("index.html", error=str(e), user_input=request.form)
-
-if __name__ == "__main__":
-    app.run(debug=True)
