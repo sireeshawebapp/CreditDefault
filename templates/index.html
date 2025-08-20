@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Credit Default Prediction</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
@@ -30,15 +30,8 @@
 
             <label>Total Pay Amount (TOTAL_PAY_AMT)</label>
             <input type="number" step="any" name="TOTAL_PAY_AMT" required value="{{ user_input.get('TOTAL_PAY_AMT', '') }}">
-
-            <label>Average Bill Amount (AVG_BILL_AMT)</label>
-            <input type="number" step="any" name="AVG_BILL_AMT" required value="{{ user_input.get('AVG_BILL_AMT', '') }}">
-
-            <label>Average Pay Amount (AVG_PAY_AMT)</label>
-            <input type="number" step="any" name="AVG_PAY_AMT" required value="{{ user_input.get('AVG_PAY_AMT', '') }}">
-
-            <label>Utilization Ratio (UTILIZATION_RATIO)</label>
-            <input type="number" step="any" name="UTILIZATION_RATIO" required value="{{ user_input.get('UTILIZATION_RATIO', '') }}">
+            
+            <p class="note"><em>Derived features like Average Bill Amount are calculated automatically.</em></p>
 
             <button type="submit">Predict</button>
         </form>
