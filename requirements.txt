@@ -1,7 +1,5 @@
 Flask
-streamlit
-pandas
+gunicorn
+joblib
 numpy
 scikit-learn
-joblib
-
