@@ -1,4 +1,7 @@
 Flask
-joblib
+streamlit
+pandas
 numpy
-gunicorn
+scikit-learn
+joblib
+
